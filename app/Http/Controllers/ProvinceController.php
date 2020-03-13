@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Province;
 use Illuminate\Http\Request;
+use App\Http\Resources\ProvinceCollection;
 
 class ProvinceController extends Controller
 {
@@ -14,7 +15,11 @@ class ProvinceController extends Controller
      */
     public function index()
     {
-        //
+        $provinces = Province::orderBy('created_at', 'DESC');
+        if (request()->q != '') {
+            $provinces = $provinces->where('name', 'LIKE', '%' . request()->q . '%');
+        }
+        return new ProvinceCollection($provinces->get());
     }
 
     /**
@@ -34,9 +39,10 @@ class ProvinceController extends Controller
      * @param  \App\Province  $province
      * @return \Illuminate\Http\Response
      */
-    public function show(Province $province)
+    public function show($id)
     {
-        //
+        $province = Province::whereId($id)->first();
+        return response()->json(['status' => 'success', 'data' => $province], 200);
     }
 
     /**

@@ -17,3 +17,12 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+// Route::group(['middleware' => 'auth:api'], function() {
+//     Route::resource('/outlets', 'API\OutletController')->except(['show']);
+// });
+
+Route::resource('/province', 'ProvinceController')->except(['store','update','destroy','create','edit']);
+Route::resource('/city', 'CityController')->except(['store','update','destroy','create','edit']);
+Route::resource('/district', 'DistrictController')->except(['store','update','destroy','create','edit']);
+Route::resource('/village', 'VillageController')->except(['store','update','destroy','create','edit']);

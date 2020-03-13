@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\City;
 use Illuminate\Http\Request;
+use App\Http\Resources\CityCollection;
 
 class CityController extends Controller
 {
@@ -14,7 +15,11 @@ class CityController extends Controller
      */
     public function index()
     {
-        //
+        $cities = City::orderBy('created_at', 'DESC');
+        if (request()->q != '') {
+            $cities = $cities->where('name', 'LIKE', '%' . request()->q . '%');
+        }
+        return new CityCollection($cities->get());
     }
 
     /**
@@ -34,9 +39,10 @@ class CityController extends Controller
      * @param  \App\City  $city
      * @return \Illuminate\Http\Response
      */
-    public function show(City $city)
+    public function show($id)
     {
-        //
+        $city = City::whereId($id)->first();
+        return response()->json(['status' => 'success', 'data' => $city], 200);
     }
 
     /**

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Village;
 use Illuminate\Http\Request;
+use App\Http\Resources\VillageCollection;
 
 class VillageController extends Controller
 {
@@ -14,7 +15,11 @@ class VillageController extends Controller
      */
     public function index()
     {
-        //
+        $villages = Village::orderBy('created_at', 'DESC');
+        if (request()->q != '') {
+            $villages = $villages->where('name', 'LIKE', '%' . request()->q . '%');
+        }
+        return new VillageCollection($villages->get());
     }
 
     /**
@@ -34,9 +39,10 @@ class VillageController extends Controller
      * @param  \App\Village  $village
      * @return \Illuminate\Http\Response
      */
-    public function show(Village $village)
+    public function show($id)
     {
-        //
+        $village = Village::whereId($id)->first();
+        return response()->json(['status' => 'success', 'data' => $village], 200);
     }
 
     /**

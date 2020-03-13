@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\District;
 use Illuminate\Http\Request;
+use App\Http\Resources\DistrictCollection;
 
 class DistrictController extends Controller
 {
@@ -14,7 +15,11 @@ class DistrictController extends Controller
      */
     public function index()
     {
-        //
+        $districts = District::orderBy('created_at', 'DESC');
+        if (request()->q != '') {
+            $districts = $districts->where('name', 'LIKE', '%' . request()->q . '%');
+        }
+        return new DistrictCollection($districts->get());
     }
 
     /**
@@ -34,9 +39,10 @@ class DistrictController extends Controller
      * @param  \App\District  $district
      * @return \Illuminate\Http\Response
      */
-    public function show(District $district)
+    public function show($id)
     {
-        //
+        $district = District::whereId($id)->first();
+        return response()->json(['status' => 'success', 'data' => $district], 200);
     }
 
     /**
