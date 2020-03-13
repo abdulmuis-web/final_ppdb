@@ -23,9 +23,9 @@ class CreateNatExamTmpsTable extends Migration
             $table->float('ne_bing');
             $table->float('ne_ipa');
             $table->float('ne_mat');
-            $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('edit_by')->nullable();
-            $table->unsignedBigInteger('approve_by')->nullable();
+            $table->foreignId('user_id');
+            $table->foreignId('edit_by')->nullable();
+            $table->foreignId('approve_by')->nullable();
             $table->dateTime('approve_at')->nullable();
             $table->timestamps();
             $table->softDeletes();

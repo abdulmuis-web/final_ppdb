@@ -23,7 +23,7 @@ class CreateUsersTable extends Migration
             $table->string('avatar')->nullable();
             $table->string('api_token')->nullable();
             $table->char('role', 1)->comment('0:superadmin, 1:admin, 2:committee, 3:registrar');
-            $table->unsignedBigInteger('school_id')->nullable();
+            $table->foreignId('school_id')->nullable();
             $table->bigInteger('reg_numb');
             $table->timestamps();
             $table->softDeletes();

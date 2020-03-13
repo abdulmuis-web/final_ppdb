@@ -23,7 +23,7 @@ class CreateNatExamsTable extends Migration
             $table->float('ne_bing');
             $table->float('ne_ipa');
             $table->float('ne_mat');
-            $table->unsignedBigInteger('user_id');
+            $table->foreignId('user_id');
             $table->timestamps();
             $table->softDeletes();
         });

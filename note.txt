@@ -25,3 +25,7 @@
 -   Districts
 -   Villages
     ]
+
+#3. Fix id on provinces, cities, districts, villages (PK, NN, AI, UN)
+    Fix ref_id on cities, districts, villages (UN)
+    run migration
