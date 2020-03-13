@@ -1,0 +1,27 @@
+#1. Create base table :
+[
+
+-   Registration
+-   NatExam
+-   Parents
+-   Guardian
+-   Address
+-   School
+-   File
+-   Facility
+-   RegistrationTmp
+-   NatExamTmp
+-   ParentsTmp
+-   GuardianTmp
+-   AddressTmp
+-   SchoolTmp
+    ]
+
+#2. Import and create new table using workbench
+[
+
+-   Provinces
+-   Cities
+-   Districts
+-   Villages
+    ]
